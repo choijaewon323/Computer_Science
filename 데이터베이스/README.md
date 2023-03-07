@@ -120,3 +120,34 @@ where semester = ’Fall’ and year = 2009 and course_id in
 
 - primary key의 조합으로 relationship의 super key를 만들 수 있다.
 -> 엔티티 셋 둘의 조합에는 최대 한개의 relationship이 존재
+
+## Relational DB design
+
+#### First Normal Form (제 1 정규형)
+- 모든 속성의 도메인이 atomic 한 경우
+
+#### BCNF (Boyce-Codd 정규형)
+- 모든 함수적 종속성 a -> b에 대해서 a가 R의 수퍼키인 것
+
+#### Third Normal Form (제 3 정규형)
+- 모든 함수적 종속성 a -> b에 대해서 a가 R의 수퍼키이거나, b - a에 속한 각 속성이 R의 후보키일 때
+
+
+## Indexing
+
+#### Basic Concepts
+- 인덱싱은 원하는 데이터에 빠르게 접근하기 위해 존재
+- 인덱스 파일은 레코드(인덱스 엔트리)들로 이루어짐
+
+- 인덱스 엔트리
+
+|search-key|pointer|
+|---------|-----------|
+
+- 인덱스 종류
+	- Ordered indices : 검색 키가 정렬되어 저장
+	- Hash indices : 검색 키가 hash function을 이용한 bucket을 통해 분포되어 있음
+
+#### Ordered Indices
+- Primary index : 검색 키가 파일의 순서와 일치하는 인덱스 (clustering index)
+- Secondary index : 검색 키가 파일의 순서와 일치하지 않는 인덱스 (non-clustering index)
