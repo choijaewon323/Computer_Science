@@ -8,9 +8,9 @@
   - 모든 열의 도메인은 atomic -> 나눌 수 없는 값
 
 #### Keys
-- superkey는 해당 값이 유일한 튜플을 식별할 수 있는 것\
-- candidate key는 superkey들 중 값이 가장 적은 것 ex {ID} {ID, name} superkey들 중 {ID}가  candidate key
-- candidate key들 중 하나를 선택하여 primary key가 될 수 있다.
+- superkey(슈퍼 키)는 해당 값이 유일한 튜플을 식별할 수 있는 것\
+- candidate key(후보 키)는 superkey들 중 값이 가장 적은 것 ex {ID} {ID, name} superkey들 중 {ID}가  candidate key
+- candidate key들 중 하나를 선택하여 primary key(기본 키)가 될 수 있다.
 - foreign key(외래 키) 제약 : 한 테이블의 값이 반드시 다른 테이블에서 나타나야 한다.
 
 #### relational algebra
@@ -123,14 +123,31 @@ where semester = ’Fall’ and year = 2009 and course_id in
 
 ## Relational DB design
 
-#### First Normal Form (제 1 정규형)
-- 모든 속성의 도메인이 atomic 한 경우
+#### 정규화
+- 관계형 데이터베이스의 설계에서 중복을 최소화하게 데이터를 구조화하는 프로세스
 
-#### BCNF (Boyce-Codd 정규형)
-- 모든 함수적 종속성 a -> b에 대해서 a가 R의 수퍼키인 것
+#### 이상 현상 (Anomaly)
+- 테이블 수정 시 생기는 부작용
+- 갱신 이상 : 같아야 하는 정보가 갱신 후 여러 행에 걸쳐서 다른 정보로 표현되었을 때
+- 삽입 이상 : null이 포함될 수 없는 테이블에서 하나의 컬럼 부재 때문에 삽입을 못할 때
+- 삭제 이상 : 정보 삭제 시, 삭제되면 안되는 정보까지 함께 삭제될 때
 
-#### Third Normal Form (제 3 정규형)
-- 모든 함수적 종속성 a -> b에 대해서 a가 R의 수퍼키이거나, b - a에 속한 각 속성이 R의 후보키일 때
+#### 제1정규형
+- 한 컬럼에 두 가지 이상의 정보가 들어가지 않아야 함
+- 원자성(atomicity) : 나누어지지 않는 상태
+
+#### 제2정규형
+- 제1정규형 만족
+- 후보키 K와 K에 속하지 않는 컬럼 A가 있을 때, A를 결정하기 위해 K 전체를 참조해야만 하는 경우
+
+#### 제3정규형
+- 제 2정규형을 만족
+- 키가 아닌 모든 컬럼이 모든 키에 이행적 종속이 되지 않아야함
+- 이행적 함수 종속 : X -> Y 이고 Y -> Z 일 때 X -> Z 가 되는 것
+
+#### BCNF 정규화
+- 제 3정규형을 만족
+- 모든 결정자가 후보키인 경우
 
 
 ## Indexing
