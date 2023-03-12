@@ -93,3 +93,43 @@ Algorithm inPlaceQuickSort(S, l, r)
 #### 병합 정렬 (Merge Sort)
 #### 힙 정렬 (Heap Sort)
 #### 기수 정렬 (Radix Sort)
+
+## 그래프 및 그래프 순회
+
+#### DFS
+#### BFS
+#### 강한 연결 요소 (Strongly Connected Components)
+- 강하게 연결됨 : 유향 그래프에서 모든 정점쌍 v, w가 도달 가능한 것
+- 강한 연결 요소 : 부분 그래프에서 모든 정점쌍 v, w가 도달 가능한 것
+- Transpose Graph : 유향 그래프에서 모든 간선의 방향이 반대인 그래프
+- 강한 연결 요소 찾는 알고리즘
+```
+1. DFS를 수행한다.
+2. DFS를 수행하고 각각이 끝날 때마다 스택에 집어넣는다.
+3. Transpose graph에 대해서 DFS를 수행한다. 이 때 시작점은 스택에서 pop하는 순서대로이다.
+4. DFS가 끝날 때마다 저장한다.
+```
+
+
+## 그리디 알고리즘 (Greedy Algorithm)
+- 순간의 선택을 최선이라고 생각함
+- 최소 스패닝 트리, 두 정점의 최단 거리(일대다)에 사용
+
+#### 최소 스패닝 트리 (Minimum Spanning Tree)
+- 스패닝 트리 : 모든 정점이 연결되어있고, 모든 정점을 포함한 부분그래프
+- 최소 스패닝 트리 : 스패닝 트리에서 최소의 가중치를 가지는 것
+
+##### 1. 프림 알고리즘 (Prim's Algorithm)
+
+##### 2. 크루스칼 알고리즘 (Kruskal's Algorithm)
+
+## 최단 거리
+
+#### 다익스트라 알고리즘 (Dijkstra's Algorithm)
+- 그리디 알고리즘 이용
+- 최악 시간 복잡도 : O(E + V log V)
+- 일대다
+#### 플로이드-워셜 알고리즘 (Floyd-Warshall Algorithm)
+- 다이나믹 프로그래밍 이용
+- 최악 시간 복잡도 : O(n^3)
+- 다대다
