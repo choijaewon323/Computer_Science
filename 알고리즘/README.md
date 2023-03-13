@@ -133,3 +133,27 @@ Algorithm inPlaceQuickSort(S, l, r)
 - 다이나믹 프로그래밍 이용
 - 최악 시간 복잡도 : O(n^3)
 - 다대다
+
+## 다이나믹 프로그래밍 (Dynamic Programming)
+
+#### 피보나치
+
+#### 행렬 곱셈 
+
+
+## 문자열 매칭 (String Matching)
+
+#### 브루트 포스 알고리즘 (Brute-force Algorithm)
+
+#### KMP 알고리즘 (Knuth-Morris-Pratt Algorithm)
+
+#### 보이어-무어 알고리즘 (Boyer-Moore Algorithm)
+
+
+## NP-Complete 문제
+
+#### P 클래스와 NP 클래스
+
+#### NP-Complete 클래스
+
+#### NP-Complete 문제
