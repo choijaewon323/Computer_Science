@@ -127,7 +127,7 @@ segment 5 : 14001
 - Slow start ->(thresh) Congestion avoidance
 
 
-### TCP와 UDP 차이
+## TCP와 UDP 차이
 
 #### UDP
 - 비디오 재생, DNS 조회와 같은 민감한 전송을 위해 사용
