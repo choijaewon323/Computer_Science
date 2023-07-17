@@ -316,12 +316,12 @@
 ### 4. Peterson’s Algorithm
 ```
 do {
-flag[0] = TRUE;
-turn = 1;
-While ( flag[1] && turn == 1);
-CRITICAL SECTION
-flag[0] = FALSE;
-REMAINDER SECTION
+	flag[0] = TRUE;
+	turn = 1;
+	While ( flag[1] && turn == 1);
+	CRITICAL SECTION
+	flag[0] = FALSE;
+	REMAINDER SECTION
 } while (TRUE);
 ```
 
