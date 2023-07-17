@@ -173,3 +173,90 @@ segment 5 : 14001
 - 하나의 공인 IP에 여러 사설 IP 할당 -> 주소 가용범위 확장
 - NAT 장치가 사설 IP와 공인 IP 간의 변환
 
+
+## HTTP
+
+### 1. HTTP란
+- 응용 계층의 프로토콜
+- 웹 페이지는 object로 구성
+- object는 단순히 파일을 지칭 - HTML이나 각종 이미지 등
+- http://www.example.com/department/picture.jpg 에서 www.example.com 은 호스트 이름, /department/picture.jpg 는 경로 이름
+- 전송 계층의 프로토콜로 TCP 사용
+- HTTP 서버는 클라이언트에 대한 어떠한 정보도 유지하지 않음 - stateless protocol
+- client-server application architecture 사용 -> 서버가 고정된 아이피로 항상 켜져있음
+
+### 2. 비영속성과 영속성 연결
+- 각각의 요청/응답을 개별적인 TCP 커넥션으로 처리하는것 - 비영속성 연결 (non-persistent connection)
+- 같은 TCP 커넥션 안에서 모든 요청/응답 처리 - 영속성 연결 (persistent connection)
+
+#### HTTP with non-persistent connection
+1. HTTP 클라이언트가 www.example.com 서버와 TCP 커넥션 연결함 - 서버의 80번 포트 사용 - 소켓 생성됨
+2. 클라이언트가 /department/home .index. 라는 내용이 포함된 메시지 request를 보냄 - 소켓을 통해
+3. 서버가 /department/home.index 를 찾아 response message를 보냄
+4. 서버가 TCP 커넥션을 닫음
+5. 클라이언트가 response message를 받음 - TCP 연결 종료
+6. 나머지 받아야할 object들에 대해 위 과정을 반복
+
+
+- 비영속성 연결에서는 하나의 메시지만을 주고받음
+
+
+- RTT(Round-Trip Time) : 작은 패킷 하나가 갔다 다시 오는 시간
+- 하이퍼링크 클릭 -> TCP 연결 초기화 -> 클라이언트가 TCP 세그먼트 전송(SYN) -> 서버가 SYN + ACK으로 응답 - 여기까지 1 RTT -> 클라이언트가 ACK을 HTTP request message 와 함께 전송 -> 서버가 response message 전송 - 여기까지 2 RTT
+- non-persistent connection 에서는 한번의 메시지 주고받을 때 2 RTT 소모
+
+
+#### HTTP with persistent connection
+- 서버가 response 를 보내고 TCP 연결을 유지
+- 같은 연결 사이에서는 계속 메시지 주고받을 수 있음
+- 특정 시간이 경과하면 (not used) 커넥션 종료
+ 
+
+
+### 3. HTTP 메시지 포맷
+- HTTP message 에서는 두가지 타입 존재 : request 와 response
+
+#### HTTP Request Message
+- 메시지 첫번째 줄 - request line
+- 나머지 줄들 - header line
+- 첫번째 줄에는 method, URL, HTTP version 필드 존재
+- header line 이 끝나면 entity body 존재
+- body 는 request의 경우 POST에서 사용 - form 전송 등에서 사용
+- 그러나 GET으로도 가능 - 이 경우 URL의 파라미터로 form 데이터들이 들어가게됨
+
+#### HTTP Response Message
+- status line, header lines, entity body 로 구성
+- status line 에는 protocol version, status code, status message 필드 존재
+
+
+
+
+### 4. 사용자-서버 상호작용 : 쿠키
+- 쿠키 : 사이트로 하여금 유저의 정보를 유지할 수 있도록 해주는 것
+- 쿠키 기술의 네가지 요소
+	- response 안에 있는 쿠키 헤더 라인
+	- request 안에 있는 쿠키 헤더 라인
+	- 유저 브라우저에 있는 쿠키 파일
+	- 백엔드 데이터베이스
+- 요청이 들어오면 서버는 식별 숫자를 만들어 데이터베이스에 저장하고, response 헤더에 set-cookie 헤더 지정
+- 그 이후 같은 서버에 대한 요청에 대해서 쿠키 식별 넘버를 헤더에 추가하여 요청하게 됨
+
+
+
+### 5. 웹 캐싱
+- 웹 캐시 (프록시 서버) : 원래의 웹 서버의 역할을 대신하는 네트워크 엔티티
+- 자신의 저장 공간과 최근에 요청된 object들을 가지고 있음
+1. 브라우저가 어떤 서버로 요청을 보낼때, 웹 캐시를 먼저 방문함
+2. 만약 웹 캐시에 요청받은 object가 있다면 그걸 바로 리턴
+3. 만약 없으면 원래 서버에게 받아옴
+4. 원래 서버로부터 온 데이터를 저장하고, 클라이언트에게 전송함
+
+
+
+- 보통 ISP가 관리
+- 장점
+	1. 반응 시간을 줄일 수 있음
+	2. 트래픽을 줄일 수 있음
+
+
+
