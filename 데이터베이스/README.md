@@ -397,17 +397,3 @@ write(B)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-#### Ordered Indices
-- Primary index : 검색 키가 파일의 순서와 일치하는 인덱스 (clustering index)
-- Secondary index : 검색 키가 파일의 순서와 일치하지 않는 인덱스 (non-clustering index)
